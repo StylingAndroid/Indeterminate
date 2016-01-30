@@ -4,8 +4,8 @@ import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
+import android.graphics.Path;
+import android.support.v4.view.animation.PathInterpolatorCompat;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 
@@ -42,9 +42,14 @@ final class IndeterminateAnimatorFactory {
         return animator;
     }
 
+    //CHECKSTYLE IGNORE MagicNumber
     private static Interpolator createStartInterpolator() {
-        return new DecelerateInterpolator();
+        Path path = new Path();
+        path.cubicTo(0.3f, 0f, 0.1f, 0.75f, 0.5f, 0.85f);
+        path.lineTo(1f, 1f);
+        return PathInterpolatorCompat.create(path);
     }
+    //CHECKSTYLE END IGNORE MagicNumber
 
     private static Animator createSweepAngleAnimator(IndeterminateDrawable drawable) {
         ObjectAnimator animator = ObjectAnimator.ofFloat(drawable, END_ANGLE, 0f, END_ANGLE_MAX);
@@ -55,9 +60,14 @@ final class IndeterminateAnimatorFactory {
         return animator;
     }
 
+    //CHECKSTYLE IGNORE MagicNumber
     private static Interpolator createEndInterpolator() {
-        return new AccelerateInterpolator();
+        Path path = new Path();
+        path.lineTo(0.5f, 0.1f);
+        path.cubicTo(0.7f, 0.15f, 0.6f, 0.75f, 1f, 1f);
+        return PathInterpolatorCompat.create(path);
     }
+    //CHECKSTYLE END IGNORE MagicNumber
 
     private static Animator createAnimationAnimator(IndeterminateDrawable drawable) {
         ObjectAnimator rotateAnimator = ObjectAnimator.ofFloat(drawable, ROTATION, 0, ROTATION_END_ANGLE);
