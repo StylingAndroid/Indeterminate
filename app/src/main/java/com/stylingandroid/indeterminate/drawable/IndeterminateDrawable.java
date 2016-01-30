@@ -1,7 +1,6 @@
 package com.stylingandroid.indeterminate.drawable;
 
 import android.animation.Animator;
-import android.animation.AnimatorSet;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -67,11 +66,7 @@ public class IndeterminateDrawable extends Drawable implements Animatable {
     }
 
     private void createAnimator() {
-        startAngle = 0;
-        //CHECKSTYLE IGNORE MagicNumber
-        endAngle = 270;
-        //CHECKSTYLE END IGNORE MagicNumber
-        animator = new AnimatorSet();
+        animator = IndeterminateAnimatorFactory.createIndeterminateDrawableAnimator(this);
     }
 
     @Override
