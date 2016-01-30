@@ -68,7 +68,9 @@ public class IndeterminateDrawable extends Drawable implements Animatable {
 
     private void createAnimator() {
         startAngle = 0;
+        //CHECKSTYLE IGNORE MagicNumber
         endAngle = 270;
+        //CHECKSTYLE END IGNORE MagicNumber
         animator = new AnimatorSet();
     }
 
